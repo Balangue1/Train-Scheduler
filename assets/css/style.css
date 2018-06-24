@@ -1,0 +1,31 @@
+body, html {
+    height: 100%;
+}
+
+.container {
+ /*   background-image: url("../images/train2.jpg");*/
+ background-color: cornsilk;
+}
+.clearfix:after { 
+    display: block;
+    content: "";
+    clear: both;
+    display: block; 
+    }    
+
+
+
+.bg { 
+    /* The image used */
+    background-image: url("../images/train.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 15%;
+}
+

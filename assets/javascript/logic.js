@@ -60,7 +60,7 @@ var config = {
     var trainFrequency = data.frequency;
 //    var trainArrival = data.arrival;
 //    var trainMinutes = data.minutes;
-    var firstTrainTime = data.firstTrainTime;
+    var firstTrainTime = data.start;
     //do the math
 console.log(firstTrainTime);
 // First Time (pushed back 1 year to make sure it comes before current time)
@@ -84,7 +84,11 @@ console.log(firstTrainTime);
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
 // Next Train
+//    var nextTrain = moment(moment().add(tMinutesTillTrain, "minutes")).format("hh:mm");
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var nextArrival = moment(nextTrain).format('MMMM Do YYYY, H:mm a');
+    //    var nextArrival = parseInt(nextTrain, "HH:mm");
+
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
     
     //Write to DOM
@@ -93,10 +97,10 @@ console.log(firstTrainTime);
       $("<td>").text(trainName),
       $("<td>").text(trainDestination),
       $("<td>").text(trainFrequency),
-      $("<td>").text(nextTrain),
+//      $("<td>").text(nextTrain),
+      $("<td>").text(nextArrival),
       $("<td>").text(tMinutesTillTrain),
-
-      $("<td>").text(firstTrainTime)
+//      $("<td>").text(firstTrainTime)
 //      $("<td>").text(employeeRate),
 //      $("<td>").text(totalPaid),
     );
