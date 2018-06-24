@@ -7,37 +7,26 @@ var config = {
     storageBucket: "train-scheduler-7626f.appspot.com",
     messagingSenderId: "653021632819"
   };
+
   firebase.initializeApp(config);
   
   var database = firebase.database();
   var trainDB = database.ref("/trains");
   
-  //add train event
-  $("#add-train").click(function(event){
-  
+// Add train event
+$("#add-train").click(function(event){
     event.preventDefault();
     var name = $("#train-name").val().trim();
     var destination = $("#train-destination").val().trim();
     var frequency = $("#train-frequency").val().trim();
-//    var arrival = $("#train-arrival").val().trim();
-//    var minutes = $("#train-minutes").val().trim();
     var start = $("#first-train-time").val().trim();
-//    var rate = parseInt($("#employee-monthly-pay").val().trim());
-    //input validation for salary
-//    if(isNaN(rate)){
-//      $("#employee-monthly-pay").after("Please enter a number");
-//      return false;
-//    }
 
-    //push to firebase
+// Push to firebase
     trainDB.push({
       name,
       destination,
       frequency,
-//      arrival,
-//      minutes,
       start
-//      rate
     })
   
     $("#train-name").val("");
@@ -48,21 +37,19 @@ var config = {
     $("#first-train-time").val("");
 });
 
-// update table event here
-  
-  //update table event
-  trainDB.on("child_added", function(childSnapshot){
+// Update table event
+trainDB.on("child_added", function(childSnapshot){
   
     var data = childSnapshot.val();
   
     var trainName = data.name;
     var trainDestination = data.destination;
     var trainFrequency = data.frequency;
-//    var trainArrival = data.arrival;
-//    var trainMinutes = data.minutes;
     var firstTrainTime = data.start;
-    //do the math
-console.log(firstTrainTime);
+
+// Do the math
+    console.log(firstTrainTime);
+
 // First Time (pushed back 1 year to make sure it comes before current time)
     var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
     console.log(firstTimeConverted);
@@ -84,25 +71,19 @@ console.log(firstTrainTime);
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
 // Next Train
-//    var nextTrain = moment(moment().add(tMinutesTillTrain, "minutes")).format("hh:mm");
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    var nextArrival = moment(nextTrain).format('MMMM Do YYYY, H:mm a');
-    //    var nextArrival = parseInt(nextTrain, "HH:mm");
+    var nextArrival = moment(nextTrain).format('MMMM Do YYYY, h:mm a');
 
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
     
-    //Write to DOM
+//Write to DOM
     var tRow = $("<tr>");
     tRow.append(
       $("<td>").text(trainName),
       $("<td>").text(trainDestination),
       $("<td>").text(trainFrequency),
-//      $("<td>").text(nextTrain),
       $("<td>").text(nextArrival),
       $("<td>").text(tMinutesTillTrain),
-//      $("<td>").text(firstTrainTime)
-//      $("<td>").text(employeeRate),
-//      $("<td>").text(totalPaid),
     );
   
     $("#train-table").append(tRow);
