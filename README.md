@@ -2,6 +2,8 @@
 
 Train schedule application that incorporates Firebase to host arrivel and departure data.  The app retrieves and manipulates this infomation with Moment.js.  This website will provide up-to-date information about various trains, namely their arrival times and how many minutes remain until they arrive at their station.
 
+GITHUB PAGE:
+https://balangue1.github.io/Train-Scheduler/
 
 PREREQUISITES:
 Internet Browser
